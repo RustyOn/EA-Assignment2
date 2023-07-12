@@ -1,0 +1,1 @@
+export const API_URL ="https://ea-assignment2-production.up.railway.app/translations"
