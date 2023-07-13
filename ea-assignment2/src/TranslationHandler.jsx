@@ -29,7 +29,7 @@ function TranslationHandler(){
             <form onSubmit={ handleSubmit }>
                 <fieldset>
                     <input type="text" value={ text.value } onChange= { handleTextChange }/>
-                    <button type="submit">Translate</button>
+                    <button type="submit" disabled>Translate</button>
                 </fieldset>
             </form>
             <p>
