@@ -7,8 +7,7 @@ function checkUserExist(userName, jsonData){
   if (jsonData !== []) {
     for(let i = 0; i < jsonData.length; i++){
       if(jsonData[i].username === userName){
-        userExists = true
-        break
+        return userExists = true
       }else{
         userExists = false
       }
@@ -36,9 +35,9 @@ function InputDisplay() {
     if (!jsonData) return;
       const userName = inputRef.current.value;
     if(checkUserExist(userName, jsonData)){
-      return console.log("Success")
+      return console.log("Exists")
     }else{
-      return console.log("Fail")
+      return console.log("Does not exist")
     }
 
   };
@@ -56,4 +55,4 @@ function InputDisplay() {
   );
 }
 
-export default InputDisplay;
+export default InputDisplay
