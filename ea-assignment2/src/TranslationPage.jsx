@@ -1,11 +1,11 @@
-import TranslationInput from "./TranslationInput";
+////import TranslationInput from "./TranslationInput";
 import TranslationOutput from "./TranslationOutput";
+import TranslationHandler from "./TranslationHandler";
 
 function TranslationPage(){
     return(
         <>
-            <TranslationInput />
-            <TranslationOutput/>
+            <TranslationHandler/>
             
         </>
     )

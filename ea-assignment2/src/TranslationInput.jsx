@@ -1,4 +1,5 @@
 import { useState } from "react"
+import TranslationHandler from "./TranslationHandler"
 
 function TranslationInput(){
     const [ text, setText ] = useState({value: ""})
@@ -10,8 +11,11 @@ function TranslationInput(){
     const handleSubmit = event =>{
         event.preventDefault()
         console.log("thi text was entered: " + text.value)
+        TranslationHandler()
         //TODO: connect to translationHandler
     }
+
+    const textToTranslate = text.value
 
     return(
         <form onSubmit={ handleSubmit }>
