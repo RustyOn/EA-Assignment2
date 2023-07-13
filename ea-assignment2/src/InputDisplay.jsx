@@ -2,19 +2,20 @@ import { useEffect, useState, useRef } from "react";
 import { API_URL } from "./utils";
 import PostAPI from "./PostAPI";
 
-function checkUserExist(username, jsonData){
+function checkUserExist(userName, jsonData){
+  let userExists = false
   if (jsonData !== []) {
-    jsonData.map((data) => {
-      if (data.username === username) {
-        console.log("User exists");
-        return true;
-      } else {
-        
-        console.log("User does not exist");
-        return false;
-      
+    console.log(jsonData[1].username)
+    console.log(userName)
+    for(let i = 0; i < jsonData.length; i++){
+      if(jsonData[i].username === userName){
+        userExists = true
+      }else{
+        userExists = false
       }
-    });
+    }
+    console.log(userExists)
+    return userExists
   }
 }
 
