@@ -5,16 +5,14 @@ import PostAPI from "./PostAPI";
 function checkUserExist(userName, jsonData){
   let userExists = false
   if (jsonData !== []) {
-    console.log(jsonData[1].username)
-    console.log(userName)
     for(let i = 0; i < jsonData.length; i++){
       if(jsonData[i].username === userName){
         userExists = true
+        break
       }else{
         userExists = false
       }
     }
-    console.log(userExists)
     return userExists
   }
 }
