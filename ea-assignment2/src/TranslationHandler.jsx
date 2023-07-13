@@ -14,15 +14,19 @@ function TranslationHandler(){
 
     const handleSubmit = event =>{
         event.preventDefault()
-        console.log("thi text was entered: " + text.value)
-        TranslationHandler()
-        //TODO: connect to translationHandler
+        console.log("this text was entered: " + text.value)
     }
-
     
     let textToTranslate = text.value
     const textSymbolsArray = textToTranslate.split("")
     console.log(textSymbolsArray)
+    let symbolsToPrint = []
+    textSymbolsArray.forEach(symbol => {
+        //TODO: compare symbols to database and add to print
+        //loop through to compare?
+        //return symbol if match found
+        //if no match - ignore? / remove from array
+    });
 
     return(
         <>

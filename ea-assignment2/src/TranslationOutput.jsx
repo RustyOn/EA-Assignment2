@@ -4,7 +4,6 @@ import TranslationHandler from "./TranslationHandler"
 function TranslationOutput(){
 
     return(
-        
         <p>
         Text translation output
         </p>
