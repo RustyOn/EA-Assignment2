@@ -1,5 +1,22 @@
-import { useEffect, useState } from "react";
-import { API_URL, API_KEY } from "./utils";
+import { useEffect, useState, useRef } from "react";
+import { API_URL } from "./utils";
+import PostAPI from "./PostAPI";
+
+function checkUserExist(username, jsonData){
+  if (jsonData !== []) {
+    jsonData.map((data) => {
+      if (data.username === username) {
+        console.log("User exists");
+        return true;
+      } else {
+        
+        console.log("User does not exist");
+        return false;
+      
+      }
+    });
+  }
+}
 
 function InputDisplay() {
   const [jsonData, setJsonData] = useState([]);
@@ -8,60 +25,34 @@ function InputDisplay() {
     fetch(API_URL)
       .then((response) => response.json())
       .then((json) => {
-        console.log(json);
         setJsonData(json);
       })
       .catch((error) => console.error(error.message));
   }, []);
 
-  function handleSubmit(e) {
-    e.preventDefault();
+  const inputRef = useRef();
 
-    const form = e.target;
-    const formData = new FormData(form);
-
-    const formJson = Object.fromEntries(formData.entries());
-    console.log(formJson);
-
+  const handleSubmit = (event) => {
+    event.preventDefault()
     if (!jsonData) return;
-    if (jsonData) {
-      jsonData.map((data) => {
-        if (data.username === formJson.userName) {
-          return console.log("User exists");
-        }else{
-
-          fetch(API_URL, {
-            method: "POST",
-            headers: {
-              'X-API-Key': API_KEY,
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-              username: formJson.userName,
-              translations: []
-            })
-    
-        })
-          }
-          
-        
-        return console.log("Does not exist");
-      });
+      const userName = inputRef.current.value;
+    if(checkUserExist(userName, jsonData)){
+      return console.log("Success")
+    }else{
+      return console.log("Fail")
     }
-  }
+
+  };
 
   return (
     <>
-      <form method="post" onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <label>
-          Username: <input name="userName" />
+          Username: <input type="text" ref={inputRef} />
         </label>
 
-        <button type="submit">Login</button>
+        <button type="submit">Login </button>
       </form>
-
-      {jsonData &&
-        jsonData.map((data) => <h3 key={data.id}>{data.username}</h3>)}
     </>
   );
 }
