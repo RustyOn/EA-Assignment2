@@ -2,7 +2,9 @@
 function ProfilePage(){
 
     return(
-        <></>
+        <>
+            <DisplayUser/>
+        </>
     )
 }
 

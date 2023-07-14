@@ -3,6 +3,7 @@ import "./App.css";
 import LoginPage from "./LoginPage";
 import TranslationPage from "./TranslationPage";
 import Page404 from "./Page404";
+import DisplayUser from "./DisplayUser";
 import {
   BrowserRouter,
   Routes,
@@ -31,6 +32,7 @@ function App() {
   return (
     <BrowserRouter>
       <div className="App">
+        
         <Nav />
         <Routes>
           <Route path="/" element={<LoginPage />} />
