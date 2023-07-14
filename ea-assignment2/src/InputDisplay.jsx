@@ -19,6 +19,8 @@ function checkUserExist(userName, jsonData){
 function InputDisplay() {
   const [jsonData, setJsonData] = useState([]);
 
+  //Should the API be fetched every time we press submit? 
+  //Or do we refresh the data from it in some other way? 
   useEffect(() => {
     fetch(API_URL)
       .then((response) => response.json())
@@ -37,7 +39,10 @@ function InputDisplay() {
     if(checkUserExist(userName, jsonData)){
       return console.log("Exists")
     }else{
-      return console.log("Does not exist")
+      console.log("Does not exist")
+      PostAPI(userName)
+      return console.log("Added new user")
+      // Redirect?
     }
 
   };
