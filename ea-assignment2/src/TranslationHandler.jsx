@@ -22,15 +22,33 @@ function TranslationHandler(){
          textSymbolsArray = textToTranslate.split("")
         console.log(textSymbolsArray)
     }
+
     
-    console.log(imageList)
+    //console.log(imageList)
     let textToTranslate = text.value
     
     ///static/media/a 
+    let compareArray = ["a", "b", "c", "d",]
     let symbolsToPrint = []
     const checkSymbols = event => {
-        symbolsToPrint = []
-        for (let index = 0; index < textSymbolsArray.length; index++) {
+
+        for (let index = 0; index < textSymbolsArray.length; index++){
+            const symbol = textSymbolsArray[index];
+            for (let index = 0; index < compareArray.length; index++) {
+                const element = compareArray[index];
+                if(element === symbol){
+                    console.log("Match")
+                    const img = imageList[index]
+                    symbolsToPrint.push(img)
+                } else {
+                    console.log("No Match")
+                }
+
+            }
+        }
+
+
+        /* for (let index = 0; index < textSymbolsArray.length; index++) {
             const symbol = textSymbolsArray[index];
             for (let index = 0; index < imageList.length; index++) {
                 const img = imageList[index];
@@ -45,14 +63,14 @@ function TranslationHandler(){
                     console.log("no match");
                 }
             }
-        }
+        } */
     
-        if(!imgHolder.hasChildNodes){
+        /* if(imgHolder.hasChildNodes){
             while (imgHolder.lastElementChild) {
                 imgHolder.removeChild(imgHolder.lastElementChild);
             }
-        }
-        
+        } */
+        console.log(symbolsToPrint.length)
         for (let index = 0; index < symbolsToPrint.length; index++) {
             const symbol = symbolsToPrint[index];
             //console.log("symbol: " + symbol)
