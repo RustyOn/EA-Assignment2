@@ -1,4 +1,4 @@
-import { useState } from "react"
+import React, { useState, createElement } from "react"
 const images = require.context('./images', true, /\.(png)$/)
 const imageList = images.keys().map(image => images(image))
 
@@ -6,6 +6,7 @@ const imageList = images.keys().map(image => images(image))
 // --connect to symbol library--
 // --Split words into single symbols--
 // return correct symbols
+const imgHolder = document.getElementById("img-holder")
 
 function TranslationHandler(){
     const [ text, setText ] = useState({value: ""})
@@ -22,14 +23,48 @@ function TranslationHandler(){
         console.log(textSymbolsArray)
     }
     
-    //console.log(imageList)
+    console.log(imageList)
     let textToTranslate = text.value
     
     ///static/media/a 
     let symbolsToPrint = []
     const checkSymbols = event => {
         symbolsToPrint = []
-        textSymbolsArray.forEach(symbol => {
+        for (let index = 0; index < textSymbolsArray.length; index++) {
+            const symbol = textSymbolsArray[index];
+            for (let index = 0; index < imageList.length; index++) {
+                const img = imageList[index];
+                //console.log(img.indexOf(symbol, 14))
+                if(img.indexOf(symbol, 14) === 14){
+                    console.log("match")
+                    symbolsToPrint.push(img)
+                    console.log(symbolsToPrint)
+
+                }
+                else{
+                    console.log("no match");
+                }
+            }
+        }
+    
+        if(!imgHolder.hasChildNodes){
+            while (imgHolder.lastElementChild) {
+                imgHolder.removeChild(imgHolder.lastElementChild);
+            }
+        }
+        
+        for (let index = 0; index < symbolsToPrint.length; index++) {
+            const symbol = symbolsToPrint[index];
+            //console.log("symbol: " + symbol)
+            //console.log("Trying to render images")
+            const newSymbolImg = document.createElement("img")
+            newSymbolImg.src = symbol
+            imgHolder.appendChild(newSymbolImg)
+            //document.getElementById("img-id").src = symbol
+            //symbolImg(symbol)
+        }
+
+        /*textSymbolsArray.forEach(symbol => {
             console.log("looping");
             imageList.forEach(img => {
                 //let imgKey = imageList
@@ -38,13 +73,11 @@ function TranslationHandler(){
                     console.log("match")
                     symbolsToPrint.push(img)
                     console.log(symbolsToPrint)
+                    break
                 }
                 else{
                     return
                 }
-                //if img.name contains symbol  
-                //symbolsToPrint.push (img)
-                //else - return
             })
 
 
@@ -52,13 +85,18 @@ function TranslationHandler(){
             //loop through to compare?
             //return symbol if match found
             //if no match - ignore? / remove from array
-        });
+        });*/
+        
     }
-  
+
     /**
      * {imageList.map((image, index) => (
-                    <img key={index} src={image} alt={`image-${index}`} />
-                ))}
+            <img key={index} src={image} alt={`image-${index}`} />
+        ))}
+
+        return(
+                        <img key={index} src={img} alt="" />
+                    )
      */
     return(
         <>
@@ -71,7 +109,8 @@ function TranslationHandler(){
             <p>
                 Text translation
             </p>
-            <div>
+            <div id="img-holder">
+                
                 
             </div>
         </>
