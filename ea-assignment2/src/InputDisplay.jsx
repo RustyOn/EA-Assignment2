@@ -3,24 +3,24 @@ import { API_URL } from "./utils";
 import PostAPI from "./PostAPI";
 import FetchAPI from "./FetchAPI";
 
-function checkUserExist(userName, jsonData){
-  let userExists = false
+function checkUserExist(userName, jsonData) {
+  let userExists = false;
   if (jsonData !== []) {
-    for(let i = 0; i < jsonData.length; i++){
-      if(jsonData[i].username === userName){
-        return userExists = true
-      }else{
-        userExists = false
+    for (let i = 0; i < jsonData.length; i++) {
+      if (jsonData[i].username === userName) {
+        return (userExists = true);
+      } else {
+        userExists = false;
       }
     }
-    return userExists
+    return userExists;
   }
 }
 
 function InputDisplay() {
   const [jsonData, setJsonData] = useState([]);
-  //Should the API be fetched every time we press submit? 
-  //Or do we refresh the data from it in some other way? 
+  //Should the API be fetched every time we press submit?
+  //Or do we refresh the data from it in some other way?
 
   useEffect(() => {
     fetch(API_URL)
@@ -34,22 +34,21 @@ function InputDisplay() {
   const inputRef = useRef();
 
   const handleSubmit = (event) => {
-    event.preventDefault()
+    event.preventDefault();
     if (!jsonData) return;
-      const userName = inputRef.current.value;
-      //Use breaks instead of returns - whichever case it is we still want to setSession and Redirect
-    if(!checkUserExist(userName, jsonData)){
-      console.log("Does not exist")
-      //PostAPI(userName)
-      console.log("Added new user")
-    }else{
-      console.log("Exists")
-    }
-    sessionStorage.setItem("currUser", userName)
-    console.log(sessionStorage.getItem("currUser"))
-    //Redirect
+    const userName = inputRef.current.value;
 
-  }
+    if (!checkUserExist(userName, jsonData)) {
+      console.log("Does not exist");
+      //PostAPI(userName)
+      console.log("Added new user");
+    } else {
+      console.log("Exists");
+    }
+    sessionStorage.setItem("currUser", userName);
+    console.log(sessionStorage.getItem("currUser"));
+    //Redirect
+  };
 
   return (
     <>
@@ -64,4 +63,4 @@ function InputDisplay() {
   );
 }
 
-export default InputDisplay
+export default InputDisplay;
