@@ -37,16 +37,19 @@ function InputDisplay() {
     event.preventDefault()
     if (!jsonData) return;
       const userName = inputRef.current.value;
-    if(checkUserExist(userName, jsonData)){
-      return console.log("Exists")
-    }else{
+      //Use breaks instead of returns - whichever case it is we still want to setSession and Redirect
+    if(!checkUserExist(userName, jsonData)){
       console.log("Does not exist")
-      PostAPI(userName)
-      return console.log("Added new user")
-      // Redirect?
+      //PostAPI(userName)
+      console.log("Added new user")
+    }else{
+      console.log("Exists")
     }
+    sessionStorage.setItem("currUser", userName)
+    console.log(sessionStorage.getItem("currUser"))
+    //Redirect
 
-  };
+  }
 
   return (
     <>
