@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import { API_URL } from "./utils";
 import PostAPI from "./PostAPI";
+import FetchAPI from "./FetchAPI";
 
 function checkUserExist(userName, jsonData){
   let userExists = false
@@ -18,9 +19,9 @@ function checkUserExist(userName, jsonData){
 
 function InputDisplay() {
   const [jsonData, setJsonData] = useState([]);
-
   //Should the API be fetched every time we press submit? 
   //Or do we refresh the data from it in some other way? 
+
   useEffect(() => {
     fetch(API_URL)
       .then((response) => response.json())

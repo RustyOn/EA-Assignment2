@@ -1,4 +1,4 @@
-i/*mport { useEffect, useState } from "react";
+/*import { useEffect, useState } from "react";
 import { API_URL} from "./utils";
 import InputDisplay from "./InputDisplay";
 
@@ -17,7 +17,7 @@ function FetchAPI(){
       }, []);
 
       return(
-        <>{jsonData && jsonData.map(user => <InputDisplay currentUser={user} /> )}</>
+        <>${jsonData}</>
       )
 }
 
