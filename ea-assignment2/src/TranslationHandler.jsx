@@ -1,4 +1,6 @@
+import { render } from "@testing-library/react"
 import React, { useState, createElement } from "react"
+import ReactDOM from 'react-dom';
 const images = require.context('./images', true, /\.(png)$/)
 const imageList = images.keys().map(image => images(image))
 
@@ -6,11 +8,24 @@ const imageList = images.keys().map(image => images(image))
 // --connect to symbol library--
 // --Split words into single symbols--
 // return correct symbols
-const imgHolder = document.getElementById("img-holder")
+//const imgHolder = document.getElementById("img-holder")
+//const root = ReactDOM.createRoot(imgHolder);
+
+function CreateImgElement(symbol){
+    console.log(symbol)
+    var component = React.createElement(
+        'img',
+        {src: {symbol}, alt: "no pic"},
+        null
+    )
+    console.log(component)
+    render(component)
+}
 
 function TranslationHandler(){
     const [ text, setText ] = useState({value: ""})
     let textSymbolsArray = []
+    let textToTranslate = text.value
 
     const handleTextChange = event =>{
         setText({ value: event.target.value })
@@ -19,34 +34,32 @@ function TranslationHandler(){
     const handleSubmit = event =>{
         event.preventDefault()
         console.log("this text was entered: " + text.value)
-         textSymbolsArray = textToTranslate.split("")
+        textSymbolsArray = textToTranslate.split("")
         console.log(textSymbolsArray)
+
+        checkSymbols()
     }
 
-    
-    //console.log(imageList)
-    let textToTranslate = text.value
-    
-    ///static/media/a 
-    let compareArray = ["a", "b", "c", "d",]
+    let compareArray = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "x", "y", "z"]
     let symbolsToPrint = []
-    const checkSymbols = event => {
-
+    function checkSymbols (){
+        symbolsToPrint = []
         for (let index = 0; index < textSymbolsArray.length; index++){
             const symbol = textSymbolsArray[index];
+            loop1:
             for (let index = 0; index < compareArray.length; index++) {
                 const element = compareArray[index];
                 if(element === symbol){
                     console.log("Match")
                     const img = imageList[index]
                     symbolsToPrint.push(img)
+                    break loop1
+                    //console.log(img)
                 } else {
                     console.log("No Match")
                 }
-
             }
         }
-
 
         /* for (let index = 0; index < textSymbolsArray.length; index++) {
             const symbol = textSymbolsArray[index];
@@ -71,13 +84,22 @@ function TranslationHandler(){
             }
         } */
         console.log(symbolsToPrint.length)
+        console.log(symbolsToPrint)
+
+
         for (let index = 0; index < symbolsToPrint.length; index++) {
             const symbol = symbolsToPrint[index];
+            CreateImgElement(symbol)
+
             //console.log("symbol: " + symbol)
             //console.log("Trying to render images")
-            const newSymbolImg = document.createElement("img")
+            /* const newSymbolImg = document.createElement("img")
             newSymbolImg.src = symbol
-            imgHolder.appendChild(newSymbolImg)
+            newSymbolImg.height = 50
+            newSymbolImg.width = 50 
+            console.log(newSymbolImg)
+            console.log(symbol) 
+            imgHolder.appendChild(newSymbolImg) */
             //document.getElementById("img-id").src = symbol
             //symbolImg(symbol)
         }
@@ -107,6 +129,8 @@ function TranslationHandler(){
         
     }
 
+
+
     /**
      * {imageList.map((image, index) => (
             <img key={index} src={image} alt={`image-${index}`} />
@@ -120,8 +144,8 @@ function TranslationHandler(){
         <>
             <form onSubmit={ handleSubmit }>
                 <fieldset>
-                    <input type="text" value={ text.value } onChange= { handleTextChange }/>
-                    <button type="submit" onClick ={checkSymbols}>Translate</button>
+                    <input type="text" value={ text.value } onChange = { handleTextChange }/>
+                    <button type="submit" >Translate</button>
                 </fieldset>
             </form>
             <p>
