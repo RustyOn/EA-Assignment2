@@ -50,7 +50,7 @@ function TranslationHandler(){
             </p>
             <div>
                 {imageList.map((image, index) => (
-                    <img key={index} src={image.default} alt={`image-${index}`} />
+                    <img key={index} src={image} alt={`image-${index}`} />
                 ))}
             </div>
         </>
