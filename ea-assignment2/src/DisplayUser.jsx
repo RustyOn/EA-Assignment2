@@ -7,13 +7,17 @@ import ProfileItem from "./ProfileItem.jsx";
 function DisplayUser() {
   let currUser = sessionStorage.getItem("currUser");
   const [jsonData, setJsonData] = useState([]);
+  let runOnce = false
   useEffect(() => {
-    fetch(API_URL)
-      .then((response) => response.json())
-      .then((json) => {
-        setJsonData(json);
-      })
-      .catch((error) => console.error(error.message));
+    if(!runOnce){
+        fetch(API_URL)
+        .then((response) => response.json())
+        .then((json) => {
+          setJsonData(json);
+        })
+        .catch((error) => console.error(error.message));
+        runOnce = true
+    }      
   }, []);
 
   for (let i = 0; i < jsonData.length; i++) {

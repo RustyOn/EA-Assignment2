@@ -14,9 +14,7 @@ function checkUserExist(userName, jsonData) {
       if (jsonData[i].username === userName) {
         return (userExists = true);
       } else {
-
         userExists = false;
-        
       }
     }
     return userExists;
