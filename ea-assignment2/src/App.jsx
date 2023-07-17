@@ -4,12 +4,14 @@ import LoginPage from "./LoginPage";
 import TranslationPage from "./TranslationPage";
 import Page404 from "./Page404";
 import DisplayUser from "./DisplayUser";
+import {useEffect} from "react"
 import {
   BrowserRouter,
   Routes,
   Route,
   NavLink,
   useLocation,
+  useNavigate
 } from "react-router-dom";
 
 function Nav() {
@@ -29,6 +31,8 @@ function Nav() {
 }
 
 function App() {
+
+
   return (
     <BrowserRouter>
       <div className="App">

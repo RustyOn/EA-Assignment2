@@ -1,25 +1,24 @@
-
-
-function Logout(){
-   
-    sessionStorage.clear()
-    window.location.reload(true)
-    
+function Logout() {
+  sessionStorage.clear();
+  window.location.reload(true);
 }
 
-function DisplayUser(){
-    let currUser = sessionStorage.getItem("currUser")
-    if(currUser === null || currUser === ""){
-        return <>
+function DisplayUser() {
+  let currUser = sessionStorage.getItem("currUser");
+  console.log(currUser);
+  if (currUser !== null || currUser !== "") {
+    return (
+      <>
         <p>{currUser}</p>
-        </>
-    }
-    return(
-        <div>
-            <h2 id="displayUser">Welcome {currUser}!</h2>
-            <button onClick={Logout}>Logout</button>
-        </div>
-    )
+      </>
+    );
+  }
+  return (
+    <div>
+      <h2 id="displayUser">Welcome {currUser}!</h2>
+      <button onClick={Logout}>Logout</button>
+    </div>
+  );
 }
 
-export default DisplayUser
+export default DisplayUser;

@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { API_URL } from "./utils";
-import {useNavigate} from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 import PostAPI from "./PostAPI";
 import FetchAPI from "./FetchAPI";
 
@@ -20,9 +20,17 @@ function checkUserExist(userName, jsonData) {
 
 function InputDisplay() {
   const [jsonData, setJsonData] = useState([]);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   //Should the API be fetched every time we press submit?
   //Or do we refresh the data from it in some other way?
+  let currUser = sessionStorage.getItem("currUser");
+  console.log(currUser);
+
+  useEffect(() => {
+    if (currUser !== null || currUser !== "") {
+      navigate("/translations");
+    }
+  }, []);
 
   useEffect(() => {
     fetch(API_URL)
@@ -49,7 +57,7 @@ function InputDisplay() {
     }
     sessionStorage.setItem("currUser", userName);
     console.log(sessionStorage.getItem("currUser"));
-    navigate("/translation")
+    navigate("/translation");
   };
 
   return (
