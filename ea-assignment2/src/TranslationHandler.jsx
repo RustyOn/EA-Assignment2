@@ -1,36 +1,30 @@
-import { cleanup, render } from "@testing-library/react"
+import { cleanup, computeHeadingLevel, render } from "@testing-library/react"
 import React, { useState, createElement } from "react"
 import ReactDOM from 'react-dom';
 const images = require.context('./images', true, /\.(png)$/)
 const imageList = images.keys().map(image => images(image))
+let translations = []
 
 // TODO: 
 // --connect to symbol library--
 // --Split words into single symbols--
 // --return correct symbols--
-// display symbols correctly in box8 and on one line
-// 
-//const imgHolder = document.getElementById("img-holder")
-//const root = ReactDOM.createRoot(imgHolder);
+// --display symbols correctly on one line--
+// needs to clear on page change 
+// --add translations to list--
 
-const symbolHolder = React.createElement(
-    'div',
-    {width: 400, height: 400},
-    null
-)
 
 let componentArray = []
-function CreateImgElement(symbol){
+function CreateImgElement(symbol, index){
     let noPic = "No picture"
     let component = React.createElement(
         'img',
-        { src: symbol, alt: noPic, height: 50, width: 50},
+        { src: symbol, alt: noPic, height: 50, width: 50, id: index },
         null
     )
+    //console.log(component);
     componentArray.push(component)
-    //return component
 }
-//give each img a div and flexbox - must have id = can be index
 
 function TranslationHandler(){
     const [ text, setText ] = useState({value: ""})
@@ -38,6 +32,7 @@ function TranslationHandler(){
     let textToTranslate = text.value
     let compareArray = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
     let symbolsToPrint = []
+    
     
     const handleTextChange = event =>{
         setText({ value: event.target.value })
@@ -49,12 +44,14 @@ function TranslationHandler(){
         textSymbolsArray = textToTranslate.split("")
         console.log(textSymbolsArray)
 
+        translations.push(text.value)
+
         CleanUpComponents()
-        checkSymbols()
-        //RenderComponents()
+        checkAndRenderSymbols()
+        console.log(translations);
     }
     
-    function checkSymbols (){
+    function checkAndRenderSymbols (){
         componentArray = []
         symbolsToPrint = []
 
@@ -68,53 +65,43 @@ function TranslationHandler(){
                     const img = imageList[index]
                     symbolsToPrint.push(img)
                     break loop1
-                    //console.log(img)
                 } else {
                     console.log("No Match")
                 }
             }
         }
 
-        //console.log(symbolsToPrint.length)
-        //console.log(symbolsToPrint)
-
         for (let index = 0; index < symbolsToPrint.length; index++) {
             const symbol = symbolsToPrint[index];
-            CreateImgElement(symbol)
+            CreateImgElement(symbol, index)
         }
 
         let compDiv = React.createElement(
             'div',
-            { style: {flexDirection: 'row'}, style: {textAlign: 'center'} },
+            { style: {flexDirection: 'row'}, 
+            style: {textAlign: 'center'} },
             componentArray
         )
         render(compDiv)
     }
 
-    function RenderComponents(){
-        
-        /* componentArray.forEach(comp => {
-            render(comp)
-        }); */
-    }
-
     function CleanUpComponents(){
         cleanup()
     }
-    
+
     return(
         <>
             <form onSubmit={ handleSubmit }>
-                <fieldset>
-                    <input type="text" value={ text.value } onChange = { handleTextChange }/>
-                    <button type="submit" >Translate</button>
-                </fieldset>
+                
+                <input type="text" value={ text.value } onChange = { handleTextChange }/>
+                <button type="submit" >Translate</button>
             </form>
+            <button onClick={ CleanUpComponents }>Clear</button>
             <p>
-                Text translation
+                
             </p>
             <div id="img-holder">
-                  
+                
             </div>
         </>
     )
