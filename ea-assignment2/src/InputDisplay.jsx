@@ -26,12 +26,7 @@ function checkUserExist(userName, jsonData) {
 function InputDisplay() {
   const [jsonData, setJsonData] = useState([]);
   const navigate = useNavigate();
-  //Should the API be fetched every time we press submit?
-  //Or do we refresh the data from it in some other way?
   let currUser = sessionStorage.getItem("currUser");
-
- 
-
   useEffect(() => {
     fetch(API_URL)
       .then((response) => response.json())
