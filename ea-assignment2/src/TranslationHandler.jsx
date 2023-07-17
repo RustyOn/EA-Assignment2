@@ -1,8 +1,9 @@
-import { cleanup, render } from "@testing-library/react"
+import { cleanup, computeHeadingLevel, render } from "@testing-library/react"
 import React, { useState, createElement } from "react"
 import ReactDOM from 'react-dom';
 const images = require.context('./images', true, /\.(png)$/)
 const imageList = images.keys().map(image => images(image))
+let translations = []
 
 // TODO: 
 // --connect to symbol library--
@@ -10,6 +11,7 @@ const imageList = images.keys().map(image => images(image))
 // --return correct symbols--
 // --display symbols correctly on one line--
 // needs to clear on page change 
+// --add translations to list--
 
 
 let componentArray = []
@@ -20,7 +22,7 @@ function CreateImgElement(symbol, index){
         { src: symbol, alt: noPic, height: 50, width: 50, id: index },
         null
     )
-    console.log(component);
+    //console.log(component);
     componentArray.push(component)
 }
 
@@ -30,6 +32,7 @@ function TranslationHandler(){
     let textToTranslate = text.value
     let compareArray = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
     let symbolsToPrint = []
+    
     
     const handleTextChange = event =>{
         setText({ value: event.target.value })
@@ -41,8 +44,11 @@ function TranslationHandler(){
         textSymbolsArray = textToTranslate.split("")
         console.log(textSymbolsArray)
 
+        translations.push(text.value)
+
         CleanUpComponents()
         checkAndRenderSymbols()
+        console.log(translations);
     }
     
     function checkAndRenderSymbols (){
@@ -86,23 +92,19 @@ function TranslationHandler(){
     return(
         <>
             <form onSubmit={ handleSubmit }>
-                <fieldset>
-                    <input type="text" value={ text.value } onChange = { handleTextChange }/>
-                    <button type="submit" >Translate</button>
-                    
-                </fieldset>
+                
+                <input type="text" value={ text.value } onChange = { handleTextChange }/>
+                <button type="submit" >Translate</button>
             </form>
             <button onClick={ CleanUpComponents }>Clear</button>
             <p>
-                Text translation
+                
             </p>
             <div id="img-holder">
-                  
+                
             </div>
         </>
     )
-
-    
 }
 
 export default TranslationHandler
