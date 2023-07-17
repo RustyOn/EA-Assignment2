@@ -6,6 +6,8 @@ import FetchAPI from "./FetchAPI";
 
 function checkUserExist(userName, jsonData) {
   let userExists = false;
+  if(userName === "" || userName === null) return (userExists = false)
+
   if (jsonData !== []) {
     for (let i = 0; i < jsonData.length; i++) {
       if (jsonData[i].username === userName) {
@@ -24,10 +26,9 @@ function InputDisplay() {
   //Should the API be fetched every time we press submit?
   //Or do we refresh the data from it in some other way?
   let currUser = sessionStorage.getItem("currUser");
-  console.log(currUser);
 
   useEffect(() => {
-    if (currUser !== null || currUser !== "") {
+    if (currUser) {
       navigate("/translations");
     }
   }, []);
@@ -46,20 +47,24 @@ function InputDisplay() {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (!jsonData) return;
-    const userName = inputRef.current.value;
+    let userName = inputRef.current.value;
 
-    if (checkUserExist(userName, jsonData === false)) {
-      console.log("Does not exist");
-      //PostAPI(userName)
-      console.log("Added new user");
-    } else {
-      console.log("Exists");
+    if(userName === ''){
+      console.log("Input is empty")
+    }else{
+      if (checkUserExist(userName, jsonData === false)) {
+        console.log("Does not exist");
+        //PostAPI(userName)
+        console.log("Added new user");
+        sessionStorage.setItem("currUser", userName);
+        navigate("/translation");
+      } else {
+        console.log("Exists");
+        sessionStorage.setItem("currUser", userName);
+        navigate("/translation");
+      }
     }
-    sessionStorage.setItem("currUser", userName);
-    console.log(sessionStorage.getItem("currUser"));
-    navigate("/translation");
-  };
-
+  }
   return (
     <>
       <form onSubmit={handleSubmit}>

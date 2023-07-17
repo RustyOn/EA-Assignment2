@@ -1,3 +1,4 @@
+import DisplayUser from "./DisplayUser"
 
 function ProfilePage(){
 
