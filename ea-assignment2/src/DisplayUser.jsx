@@ -23,13 +23,14 @@ function DisplayUser() {
         jsonData[i].translations !== null
       ) {
         console.log(jsonData[i].translations[j]);
+        return (
+            <>
+              <p>{jsonData[i].translations}</p>
+            </>
+          );
       }
     }
-    return (
-      <>
-        <p>{jsonData[i].translations}</p>
-      </>
-    );
+   
   }
 }
 
