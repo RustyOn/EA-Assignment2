@@ -1,4 +1,4 @@
-import { render } from "@testing-library/react"
+import { cleanup, render } from "@testing-library/react"
 import React, { useState, createElement } from "react"
 import ReactDOM from 'react-dom';
 const images = require.context('./images', true, /\.(png)$/)
@@ -11,21 +11,34 @@ const imageList = images.keys().map(image => images(image))
 //const imgHolder = document.getElementById("img-holder")
 //const root = ReactDOM.createRoot(imgHolder);
 
+const symbolHolder = React.createElement(
+    'div',
+    {width: 400, height: 400},
+    null
+)
+
+let componentArray = []
 function CreateImgElement(symbol){
     console.log(symbol)
-    var component = React.createElement(
+    let noPic = "No picture"
+    let component = React.createElement(
         'img',
-        {src: {symbol}, alt: "no pic"},
+        { src: symbol, alt: noPic, height: 50, width: 50},
         null
     )
     console.log(component)
-    render(component)
+    
+    componentArray.push(component)
+    //return component
 }
+
+
 
 function TranslationHandler(){
     const [ text, setText ] = useState({value: ""})
     let textSymbolsArray = []
     let textToTranslate = text.value
+    
 
     const handleTextChange = event =>{
         setText({ value: event.target.value })
@@ -43,6 +56,8 @@ function TranslationHandler(){
     let compareArray = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "x", "y", "z"]
     let symbolsToPrint = []
     function checkSymbols (){
+        componentArray = []
+        CleanUpComponents()
         symbolsToPrint = []
         for (let index = 0; index < textSymbolsArray.length; index++){
             const symbol = textSymbolsArray[index];
@@ -126,10 +141,21 @@ function TranslationHandler(){
             //return symbol if match found
             //if no match - ignore? / remove from array
         });*/
+
+        RenderComponents()
         
     }
 
+    function RenderComponents(){
+        componentArray.forEach(comp => {
+            render(comp)
+        });
+    }
 
+    function CleanUpComponents(){
+        cleanup()
+    }
+    
 
     /**
      * {imageList.map((image, index) => (
