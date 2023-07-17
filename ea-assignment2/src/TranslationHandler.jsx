@@ -21,24 +21,22 @@ const symbolHolder = React.createElement(
 
 let componentArray = []
 function CreateImgElement(symbol){
-    console.log(symbol)
     let noPic = "No picture"
     let component = React.createElement(
         'img',
         { src: symbol, alt: noPic, height: 50, width: 50},
         null
     )
-    console.log(component)
-    
     componentArray.push(component)
     //return component
 }
+//give each img a div and flexbox - must have id = can be index
 
 function TranslationHandler(){
     const [ text, setText ] = useState({value: ""})
     let textSymbolsArray = []
     let textToTranslate = text.value
-    let compareArray = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "x", "y", "z"]
+    let compareArray = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
     let symbolsToPrint = []
     
     const handleTextChange = event =>{
@@ -51,11 +49,12 @@ function TranslationHandler(){
         textSymbolsArray = textToTranslate.split("")
         console.log(textSymbolsArray)
 
+        CleanUpComponents()
         checkSymbols()
+        //RenderComponents()
     }
     
     function checkSymbols (){
-        CleanUpComponents()
         componentArray = []
         symbolsToPrint = []
 
@@ -84,13 +83,19 @@ function TranslationHandler(){
             CreateImgElement(symbol)
         }
 
-        RenderComponents()
+        let compDiv = React.createElement(
+            'div',
+            { style: {flexDirection: 'row'}, style: {textAlign: 'center'} },
+            componentArray
+        )
+        render(compDiv)
     }
 
     function RenderComponents(){
-        componentArray.forEach(comp => {
+        
+        /* componentArray.forEach(comp => {
             render(comp)
-        });
+        }); */
     }
 
     function CleanUpComponents(){
@@ -112,7 +117,6 @@ function TranslationHandler(){
                   
             </div>
         </>
-        
     )
 }
 
