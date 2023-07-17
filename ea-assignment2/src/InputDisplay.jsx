@@ -1,19 +1,22 @@
 import { useEffect, useState, useRef } from "react";
 import { API_URL } from "./utils";
-import { useNavigate } from "react-router-dom";
+import { json, useNavigate } from "react-router-dom";
 import PostAPI from "./PostAPI";
 import FetchAPI from "./FetchAPI";
 
 function checkUserExist(userName, jsonData) {
   let userExists = false;
+  
   if(userName === "" || userName === null) return (userExists = false)
-
+  
   if (jsonData !== []) {
     for (let i = 0; i < jsonData.length; i++) {
       if (jsonData[i].username === userName) {
         return (userExists = true);
       } else {
+
         userExists = false;
+        
       }
     }
     return userExists;
@@ -27,11 +30,7 @@ function InputDisplay() {
   //Or do we refresh the data from it in some other way?
   let currUser = sessionStorage.getItem("currUser");
 
-  useEffect(() => {
-    if (currUser) {
-      navigate("/translations");
-    }
-  }, []);
+ 
 
   useEffect(() => {
     fetch(API_URL)
@@ -42,27 +41,33 @@ function InputDisplay() {
       .catch((error) => console.error(error.message));
   }, []);
 
+  useEffect(() => {
+    if (currUser) {
+      navigate("/translations");
+    }
+  }, []);
+
   const inputRef = useRef();
 
   const handleSubmit = (event) => {
     event.preventDefault();
     if (!jsonData) return;
     let userName = inputRef.current.value;
+    sessionStorage.setItem("currUser", userName);
 
     if(userName === ''){
       console.log("Input is empty")
     }else{
-      if (checkUserExist(userName, jsonData === false)) {
+      if (checkUserExist(userName, jsonData) === false) {
         console.log("Does not exist");
         //PostAPI(userName)
         console.log("Added new user");
-        sessionStorage.setItem("currUser", userName);
-        navigate("/translation");
+       
       } else {
         console.log("Exists");
-        sessionStorage.setItem("currUser", userName);
-        navigate("/translation");
+
       }
+      navigate("/translation");
     }
   }
   return (
