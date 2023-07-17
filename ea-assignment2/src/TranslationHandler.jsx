@@ -1,4 +1,4 @@
-import { render } from "@testing-library/react"
+import { cleanup, render } from "@testing-library/react"
 import React, { useState, createElement } from "react"
 import ReactDOM from 'react-dom';
 const images = require.context('./images', true, /\.(png)$/)
@@ -7,26 +7,38 @@ const imageList = images.keys().map(image => images(image))
 // TODO: 
 // --connect to symbol library--
 // --Split words into single symbols--
-// return correct symbols
+// --return correct symbols--
+// display symbols correctly in box8 and on one line
+// 
 //const imgHolder = document.getElementById("img-holder")
 //const root = ReactDOM.createRoot(imgHolder);
 
+const symbolHolder = React.createElement(
+    'div',
+    {width: 400, height: 400},
+    null
+)
+
+let componentArray = []
 function CreateImgElement(symbol){
-    console.log(symbol)
-    var component = React.createElement(
+    let noPic = "No picture"
+    let component = React.createElement(
         'img',
-        {src: {symbol}, alt: "no pic"},
+        { src: symbol, alt: noPic, height: 50, width: 50},
         null
     )
-    console.log(component)
-    render(component)
+    componentArray.push(component)
+    //return component
 }
+//give each img a div and flexbox - must have id = can be index
 
 function TranslationHandler(){
     const [ text, setText ] = useState({value: ""})
     let textSymbolsArray = []
     let textToTranslate = text.value
-
+    let compareArray = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
+    let symbolsToPrint = []
+    
     const handleTextChange = event =>{
         setText({ value: event.target.value })
     }
@@ -37,13 +49,15 @@ function TranslationHandler(){
         textSymbolsArray = textToTranslate.split("")
         console.log(textSymbolsArray)
 
+        CleanUpComponents()
         checkSymbols()
+        //RenderComponents()
     }
-
-    let compareArray = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "x", "y", "z"]
-    let symbolsToPrint = []
+    
     function checkSymbols (){
+        componentArray = []
         symbolsToPrint = []
+
         for (let index = 0; index < textSymbolsArray.length; index++){
             const symbol = textSymbolsArray[index];
             loop1:
@@ -61,7 +75,64 @@ function TranslationHandler(){
             }
         }
 
-        /* for (let index = 0; index < textSymbolsArray.length; index++) {
+        //console.log(symbolsToPrint.length)
+        //console.log(symbolsToPrint)
+
+        for (let index = 0; index < symbolsToPrint.length; index++) {
+            const symbol = symbolsToPrint[index];
+            CreateImgElement(symbol)
+        }
+
+        let compDiv = React.createElement(
+            'div',
+            { style: {flexDirection: 'row'}, style: {textAlign: 'center'} },
+            componentArray
+        )
+        render(compDiv)
+    }
+
+    function RenderComponents(){
+        
+        /* componentArray.forEach(comp => {
+            render(comp)
+        }); */
+    }
+
+    function CleanUpComponents(){
+        cleanup()
+    }
+    
+    return(
+        <>
+            <form onSubmit={ handleSubmit }>
+                <fieldset>
+                    <input type="text" value={ text.value } onChange = { handleTextChange }/>
+                    <button type="submit" >Translate</button>
+                </fieldset>
+            </form>
+            <p>
+                Text translation
+            </p>
+            <div id="img-holder">
+                  
+            </div>
+        </>
+    )
+}
+
+export default TranslationHandler
+
+/**
+     * {imageList.map((image, index) => (
+            <img key={index} src={image} alt={`image-${index}`} />
+        ))}
+
+        return(
+                        <img key={index} src={img} alt="" />
+                    )
+     */
+
+ /* for (let index = 0; index < textSymbolsArray.length; index++) {
             const symbol = textSymbolsArray[index];
             for (let index = 0; index < imageList.length; index++) {
                 const img = imageList[index];
@@ -83,26 +154,6 @@ function TranslationHandler(){
                 imgHolder.removeChild(imgHolder.lastElementChild);
             }
         } */
-        console.log(symbolsToPrint.length)
-        console.log(symbolsToPrint)
-
-
-        for (let index = 0; index < symbolsToPrint.length; index++) {
-            const symbol = symbolsToPrint[index];
-            CreateImgElement(symbol)
-
-            //console.log("symbol: " + symbol)
-            //console.log("Trying to render images")
-            /* const newSymbolImg = document.createElement("img")
-            newSymbolImg.src = symbol
-            newSymbolImg.height = 50
-            newSymbolImg.width = 50 
-            console.log(newSymbolImg)
-            console.log(symbol) 
-            imgHolder.appendChild(newSymbolImg) */
-            //document.getElementById("img-id").src = symbol
-            //symbolImg(symbol)
-        }
 
         /*textSymbolsArray.forEach(symbol => {
             console.log("looping");
@@ -126,38 +177,3 @@ function TranslationHandler(){
             //return symbol if match found
             //if no match - ignore? / remove from array
         });*/
-        
-    }
-
-
-
-    /**
-     * {imageList.map((image, index) => (
-            <img key={index} src={image} alt={`image-${index}`} />
-        ))}
-
-        return(
-                        <img key={index} src={img} alt="" />
-                    )
-     */
-    return(
-        <>
-            <form onSubmit={ handleSubmit }>
-                <fieldset>
-                    <input type="text" value={ text.value } onChange = { handleTextChange }/>
-                    <button type="submit" >Translate</button>
-                </fieldset>
-            </form>
-            <p>
-                Text translation
-            </p>
-            <div id="img-holder">
-                
-                
-            </div>
-        </>
-        
-    )
-}
-
-export default TranslationHandler
