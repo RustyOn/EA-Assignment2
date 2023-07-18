@@ -1,8 +1,8 @@
 import { useEffect, useState, useRef } from "react";
 import { API_URL } from "./utils";
-import { json, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import PostAPI from "./PostAPI";
-import FetchAPI from "./FetchAPI";
+
 
 function checkUserExist(userName, jsonData) {
   let userExists = false;
