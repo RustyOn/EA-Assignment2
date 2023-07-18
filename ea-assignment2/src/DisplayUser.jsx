@@ -30,7 +30,7 @@ function DisplayUser() {
       const listTrans = jsonData[i].translations.map((translation, index) => (
         <li key={index}>{translation}</li>
       ));
-      return <ul>{listTrans}</ul>;
+      return <ul>UserID: {sessionStorage.getItem("currID")}{listTrans}</ul>;
     }
   }
 }

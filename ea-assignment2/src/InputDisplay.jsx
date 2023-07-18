@@ -6,12 +6,14 @@ import FetchAPI from "./FetchAPI";
 
 function checkUserExist(userName, jsonData) {
   let userExists = false;
-  
+  let currID = 0
   if(userName === "" || userName === null) return (userExists = false)
   
   if (jsonData !== []) {
     for (let i = 0; i < jsonData.length; i++) {
       if (jsonData[i].username === userName) {
+        currID = i
+        sessionStorage.setItem("currID", currID)
         return (userExists = true);
       } else {
         userExists = false;
