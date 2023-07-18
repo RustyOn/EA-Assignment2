@@ -83,8 +83,20 @@ function TranslationHandler(){
 
         let compDiv = createElement(
             'div',
-            { style: {flexDirection: 'row'}, 
-            style: {textAlign: 'center'} },
+            { style: {
+                flexDirection: 'row', 
+                textAlign: 'left', 
+                backgroundColor: "#EEEEFF", 
+                width: 400, 
+                height: 150,
+                borderRadius: 15,
+                border: 'solid',
+                position: 'absolute',
+                left: '50%',
+                marginLeft: -200,
+                padding: 10
+                }
+            },
             componentArray
         )
         render(compDiv)
@@ -101,6 +113,7 @@ function TranslationHandler(){
                 <input type="text" value={ text.value } onChange = { handleTextChange }/>
                 <button type="submit">Translate</button>
             </form>
+                <button onClick={ CleanUpComponents }>Clear</button>
             <p>
                 
             </p>
@@ -114,7 +127,7 @@ function TranslationHandler(){
 export default TranslationHandler
 
 /**
- * <button onClick={ CleanUpComponents }>Clear</button>
+ * 
      * {imageList.map((image, index) => (
             <img key={index} src={image} alt={`image-${index}`} />
         ))}
