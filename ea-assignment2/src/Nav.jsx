@@ -1,3 +1,4 @@
+import { cleanup } from "@testing-library/react";
 import {
     BrowserRouter,
     Routes,
@@ -18,17 +19,20 @@ function Nav() {
         sessionStorage.clear()
       }
     }
+
     return (
       <nav>
-        <li>
-          <NavLink to="/translation">Translation</NavLink>
-        </li>
-        <li>
-          <NavLink to="/profile">Profile</NavLink>
-        </li>
-        <li>
-          <NavLink to="/" onClick={Logout}>Logout</NavLink>
-        </li>
+        <div className="nav-bar">
+          <li>
+            <NavLink to="/translation">Translation</NavLink>
+          </li>
+          <li>
+            <NavLink to="/profile">Profile</NavLink>
+          </li>
+          <li>
+            <NavLink to="/" onClick={Logout}>Logout</NavLink>
+          </li>
+        </div>
       </nav>
     )
   }
