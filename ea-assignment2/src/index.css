@@ -15,6 +15,7 @@ code {
 .nav-bar{
   background-color: #FFC759;
   height: 75px;
+  box-shadow: 0px 2px #615055;
 }
 
 .translate-button{
@@ -29,8 +30,16 @@ code {
   cursor: pointer;
 }
 
+.translation-back{
+  background-color: #FFC759;
+  height: 150px;
+  margin-top: 2px;
+  z-index: -1;
+}
+
 input{
-  border: 2px solid #615055;
+  border: 2px solid #ffffff;
+  background-color: #f1f1f1;
   border-radius: 4px;
   width: 270px;
   height: 30px;

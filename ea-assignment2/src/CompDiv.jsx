@@ -11,11 +11,13 @@ const CompDiv = (componentArray) =>{
                 width: 400, 
                 height: 150,
                 borderRadius: 15,
-                border: 'solid',
+                border: 'none',
                 position: 'fixed',
                 left: '50%',
                 marginLeft: -200,
-                padding: 10
+                padding: 10,
+                boxShadow: '5px 5px #615055',
+                zIndex: '5'
                 }
             },
             componentArray
