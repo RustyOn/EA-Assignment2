@@ -1,4 +1,3 @@
-import { cleanup } from "@testing-library/react";
 import {
     BrowserRouter,
     Routes,
@@ -19,6 +18,7 @@ function Nav() {
         sessionStorage.clear()
       }
     }
+
 
     return (
       <nav>

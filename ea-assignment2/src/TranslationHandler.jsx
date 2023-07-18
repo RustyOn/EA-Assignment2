@@ -12,6 +12,30 @@ let translations = []
 // needs to clear on page change 
 // --add translations to list--
 
+const RenderDiv = () => {
+    let compDiv = createElement(
+        'div',
+        { style: {
+            flexDirection: 'row', 
+            textAlign: 'left', 
+            backgroundColor: "#EEEEFF", 
+            width: 400, 
+            height: 150,
+            borderRadius: 15,
+            border: 'solid',
+            position: 'fixed',
+            left: '50%',
+            marginLeft: -200,
+            padding: 10
+            }
+        },
+        null
+    )
+    render(compDiv)
+    
+}
+RenderDiv()
+
 let componentArray = []
 function CreateImgElement(symbol, index){
     let noPic = "No picture"
@@ -91,7 +115,7 @@ function TranslationHandler(){
                 height: 150,
                 borderRadius: 15,
                 border: 'solid',
-                position: 'absolute',
+                position: 'fixed',
                 left: '50%',
                 marginLeft: -200,
                 padding: 10
@@ -105,21 +129,21 @@ function TranslationHandler(){
     function CleanUpComponents(){
         cleanup()
     }
+    
+    
+
+    
 
     return(
         <>
             
             <form onSubmit={ handleSubmit }>
                 <input type="text" value={ text.value } onChange = { handleTextChange }/>
-                <button type="submit">Translate</button>
+                <p></p>
+                <button type="submit" className="translate-button">Translate</button>
             </form>
                 <button onClick={ CleanUpComponents }>Clear</button>
-            <p>
-                
-            </p>
-            <div id="img-holder">
-                
-            </div>
+                <p></p>
         </>
     )
 }
