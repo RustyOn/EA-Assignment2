@@ -1,36 +1,53 @@
-import { useState } from "react"
-import TranslationHandler from "./TranslationHandler"
+import React, { useState, createElement } from "react"
+import { compArrayEx } from "./TranslationHandler"
 
-let textSymbolsArray
-function TranslationInput(){
+let textToExport = ""
+let countToExport = 0
+function Input(){
     const [ text, setText ] = useState({value: ""})
-    let textToTranslate = text.value
-    textSymbolsArray = []
-
+    const [count, setCount] = useState(0);
+    let textT = text.value
     const handleTextChange = event =>{
         setText({ value: event.target.value })
     }
 
     const handleSubmit = event =>{
         event.preventDefault()
-        console.log("this text was entered: " + text.value)
-        textSymbolsArray = textToTranslate.split("")
-        console.log(textSymbolsArray)
-        
-        //translations.push(text.value)
-
-        //CleanUpComponents()
-        //checkAndRenderSymbols()
-        //console.log(translations);
+        textToExport = text.value
+        console.log(text.value)
+        setCount(count + 1)
+        countToExport = count
+        console.log(count)
     }
 
-    return(
-        <form onSubmit={ handleSubmit }>
-            <input type="text" value={ text.value } onChange = { handleTextChange }/>
-            <button type="submit">Translate</button>
-        </form>
+    const TranslationInput = createElement(
+        'input',
+        { type: 'text', value: textT, onChange: handleTextChange},
+        null
     )
-}
 
-export const exportTextArray = textSymbolsArray
-export default TranslationInput
+    const TranslationButton = createElement(
+        'button',
+        { type: 'submit', className: 'translate-button'},
+        "Translate"
+    )
+
+    const TranslationForm = createElement(
+        'form',
+        { onSubmit: handleSubmit },
+        TranslationInput,
+        TranslationButton
+    )
+
+    const TranslationWrapper = createElement(
+        'div',
+        { className: 'translation-back'},
+        TranslationForm,
+        compArrayEx
+    )
+
+    return TranslationWrapper
+}
+export const countExport = countToExport
+export const textExport = textToExport
+export default Input
