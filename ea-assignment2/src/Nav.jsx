@@ -1,3 +1,4 @@
+import { cleanup } from "@testing-library/react";
 import {
     BrowserRouter,
     Routes,
@@ -19,6 +20,9 @@ function Nav() {
       }
     }
 
+    function CleanUpCreatedElements(){
+      cleanup()
+    }
 
     return (
       <nav>
@@ -26,10 +30,10 @@ function Nav() {
           <li>
             <NavLink to="/translation">Translation</NavLink>
           </li>
-          <li>
+          <li onClick={ CleanUpCreatedElements }>
             <NavLink to="/profile">Profile</NavLink>
           </li>
-          <li>
+          <li onClick={ CleanUpCreatedElements }>
             <NavLink to="/" onClick={Logout}>Logout</NavLink>
           </li>
         </div>
