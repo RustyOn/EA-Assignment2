@@ -1,8 +1,10 @@
 ////import TranslationInput from "./TranslationInput";
 import TranslationOutput from "./TranslationOutput";
 import TranslationHandler from "./TranslationHandler";
+import TranslationInput from "./TranslationInput";
 
 function TranslationPage(){
+
     return(
         <>
             <TranslationHandler/>
