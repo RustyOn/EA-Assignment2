@@ -1,42 +1,11 @@
 import { cleanup, render } from "@testing-library/react"
 import React, { useState, createElement } from "react"
+import CompDiv from "./CompDiv"
 const images = require.context('./images', true, /\.(png)$/)
 const imageList = images.keys().map(image => images(image))
 let translations = []
-
-// TODO: 
-// --connect to symbol library--
-// --Split words into single symbols--
-// --return correct symbols--
-// --display symbols correctly on one line--
-// needs to clear on page change 
-// --add translations to list--
-
-const RenderDiv = () => {
-    let compDiv = createElement(
-        'div',
-        { style: {
-            flexDirection: 'row', 
-            textAlign: 'left', 
-            backgroundColor: "#EEEEFF", 
-            width: 400, 
-            height: 150,
-            borderRadius: 15,
-            border: 'solid',
-            position: 'fixed',
-            left: '50%',
-            marginLeft: -200,
-            padding: 10
-            }
-        },
-        null
-    )
-    render(compDiv)
-    
-}
-RenderDiv()
-
 let componentArray = []
+
 function CreateImgElement(symbol, index){
     let noPic = "No picture"
     let component = createElement(
@@ -49,7 +18,6 @@ function CreateImgElement(symbol, index){
 }
 
 function TranslationHandler(){
-    RenderDiv()
     const [ text, setText ] = useState({value: ""})
     let textToTranslate = text.value
     let compareArray = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
@@ -106,38 +74,15 @@ function TranslationHandler(){
             CreateImgElement(symbol, index)
         }
 
-        let compDiv = createElement(
-            'div',
-            { style: {
-                flexDirection: 'row', 
-                textAlign: 'left', 
-                backgroundColor: "#EEEEFF", 
-                width: 400, 
-                height: 150,
-                borderRadius: 15,
-                border: 'solid',
-                position: 'fixed',
-                left: '50%',
-                marginLeft: -200,
-                padding: 10
-                }
-            },
-            componentArray
-        )
-        render(compDiv)
+        render(CompDiv(componentArray))
     }
 
     function CleanUpComponents(){
         cleanup()
     }
-    
-    
-
-    
 
     return(
         <>
-            
             <form onSubmit={ handleSubmit }>
                 <input type="text" value={ text.value } onChange = { handleTextChange }/>
                 <p></p>
@@ -145,6 +90,9 @@ function TranslationHandler(){
             </form>
                 <button onClick={ CleanUpComponents }>Clear</button>
                 <p></p>
+            <div>
+                
+            </div>
         </>
     )
 }

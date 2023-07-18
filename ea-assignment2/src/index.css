@@ -40,7 +40,7 @@ input{
   height: 150;
   border-radius: 15;
   border: 'solid';
-  position: 'fixed';
+  position: 'relative';
   left: '50%';
   margin-left: -200;
   padding: 10;
