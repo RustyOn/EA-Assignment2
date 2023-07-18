@@ -20,17 +20,19 @@ code {
 .translate-button{
   background-color: #4C9F70;
   border: none;
+  border-radius: 10px;
   color: white;
-  padding: 16px 32px;
+  padding: 16px 20px;
   text-decoration: none;
-  margin: 4px 2px;
+  margin: 10px;
+
   cursor: pointer;
 }
 
 input{
   border: 2px solid #615055;
   border-radius: 4px;
-  width: 400px;
+  width: 270px;
   height: 30px;
 }
 

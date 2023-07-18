@@ -73,7 +73,6 @@ function TranslationHandler(){
             const symbol = symbolsToPrint[index];
             CreateImgElement(symbol, index)
         }
-
         render(CompDiv(componentArray))
     }
 
@@ -85,10 +84,9 @@ function TranslationHandler(){
         <>
             <form onSubmit={ handleSubmit }>
                 <input type="text" value={ text.value } onChange = { handleTextChange }/>
-                <p></p>
                 <button type="submit" className="translate-button">Translate</button>
             </form>
-                <button onClick={ CleanUpComponents }>Clear</button>
+                
                 <p></p>
             <div>
                 
@@ -98,60 +96,6 @@ function TranslationHandler(){
 }
 
 export default TranslationHandler
-
 /**
- * 
-     * {imageList.map((image, index) => (
-            <img key={index} src={image} alt={`image-${index}`} />
-        ))}
-
-        return(
-                        <img key={index} src={img} alt="" />
-                    )
-     */
-
- /* for (let index = 0; index < textSymbolsArray.length; index++) {
-        const symbol = textSymbolsArray[index];
-        for (let index = 0; index < imageList.length; index++) {
-            const img = imageList[index];
-            //console.log(img.indexOf(symbol, 14))
-            if(img.indexOf(symbol, 14) === 14){
-                console.log("match")
-                symbolsToPrint.push(img)
-                console.log(symbolsToPrint)
-
-            }
-            else{
-                console.log("no match");
-            }
-        }
-    } */
-
-    /* if(imgHolder.hasChildNodes){
-        while (imgHolder.lastElementChild) {
-            imgHolder.removeChild(imgHolder.lastElementChild);
-        }
-    } */
-
-    /*textSymbolsArray.forEach(symbol => {
-        console.log("looping");
-        imageList.forEach(img => {
-            //let imgKey = imageList
-            console.log(img.indexOf(symbol, 14))
-            if(img.indexOf(symbol, 14) === 14){
-                console.log("match")
-                symbolsToPrint.push(img)
-                console.log(symbolsToPrint)
-                break
-            }
-            else{
-                return
-            }
-        })
-
-
-        //TODO: compare symbols to database and add to print
-        //loop through to compare?
-        //return symbol if match found
-        //if no match - ignore? / remove from array
-    });*/
+ * <button onClick={ CleanUpComponents }>Clear</button>
+ */
