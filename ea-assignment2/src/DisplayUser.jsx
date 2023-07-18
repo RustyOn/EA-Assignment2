@@ -1,6 +1,11 @@
 import { useState, useEffect } from "react";
 import { API_URL } from "./utils.js";
 import ProfileItem from "./ProfileItem.jsx";
+import DeleteAPI from "./DeleteAPI.jsx";
+
+function DeleteTrans(){
+  //DeleteAPI()
+}
 
 function DisplayUser() {
   let currUser = sessionStorage.getItem("currUser");
@@ -30,7 +35,12 @@ function DisplayUser() {
       const listTrans = jsonData[i].translations.map((translation, index) => (
         <li key={index}>{translation}</li>
       ));
-      return <ul>UserID: {sessionStorage.getItem("currID")}{listTrans}</ul>;
+      return (
+        <>
+      <ul>UserID: {sessionStorage.getItem("currID")}{listTrans}</ul>
+        <button onClick={DeleteTrans}>Clear Record</button>
+        </>
+      )
     }
   }
 }
