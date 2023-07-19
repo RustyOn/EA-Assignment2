@@ -1,23 +1,25 @@
-import React, { useState, createElement } from "react"
-import { compArrayEx } from "./TranslationHandler"
+import React, { useState, createElement, createContext } from "react"
+import { OnSubmit, compArrayEx } from "./TranslationHandler"
 
+//let textToExport = ""
 let textToExport = ""
-let countToExport = 0
+//let countToExport = 0
+//const submittedContext = createContext('submitted')
+
 function Input(){
     const [ text, setText ] = useState({value: ""})
-    const [count, setCount] = useState(0);
+    //const [isSubmitted, setSubmitted] = useState(null);
+    
     let textT = text.value
     const handleTextChange = event =>{
         setText({ value: event.target.value })
     }
-
     const handleSubmit = event =>{
         event.preventDefault()
+        //textToExport = text.value
         textToExport = text.value
         console.log(text.value)
-        setCount(count + 1)
-        countToExport = count
-        console.log(count)
+        OnSubmit()
     }
 
     const TranslationInput = createElement(
@@ -48,6 +50,6 @@ function Input(){
 
     return TranslationWrapper
 }
-export const countExport = countToExport
-export const textExport = textToExport
+//export const countExport = countToExport
+export { textToExport }
 export default Input
