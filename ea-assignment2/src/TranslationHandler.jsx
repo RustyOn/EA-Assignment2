@@ -1,6 +1,7 @@
 import React, { useState, createElement, useEffect } from "react"
 import { API_URL } from "./utils";
 import PatchAPI from "./PatchAPI"
+import { json } from "react-router-dom";
 const images = require.context('./images', true, /\.(png)$/)
 const imageList = images.keys().map(image => images(image))
 let translations = []
@@ -35,20 +36,22 @@ function CreateImgElement(symbol, index){
 
 function TranslationHandler(){
     const [ text, setText ] = useState({value: ""})
+    const [jsonData, setJsonData] = useState([])
     let textToTranslate = text.value
     let compareArray = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
     let symbolsToPrint = []
     let textSymbolsArray = []
-    
-    const [jsonData, setJsonData] = useState([])
     let currID = sessionStorage.getItem("currID")
+
+    useEffect(() =>{
+        Fetch()
+    }, [])
 
     function Fetch(){
         fetch(API_URL)
             .then((response) => response.json())
             .then((json) => {
                 setJsonData(json)
-                console.log("json data: " + jsonData)
             })
         .catch((error) => console.error(error.message))
     }
