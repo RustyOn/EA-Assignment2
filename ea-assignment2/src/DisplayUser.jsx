@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { API_URL } from "./utils.js";
-import ProfileItem from "./ProfileItem.jsx";
 import DeleteAPI from "./DeleteAPI.jsx";
 
 function DeleteTrans() {

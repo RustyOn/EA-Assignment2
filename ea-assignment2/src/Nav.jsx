@@ -1,11 +1,7 @@
 import { cleanup } from "@testing-library/react";
 import {
-    BrowserRouter,
-    Routes,
-    Route,
     NavLink,
     useLocation,
-    useNavigate,
   } from "react-router-dom";
 import { RenderDiv } from "./TranslationHandler";
 
