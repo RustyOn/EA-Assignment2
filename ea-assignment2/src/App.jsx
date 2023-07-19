@@ -6,8 +6,10 @@ import Page404 from "./Page404";
 import ProfilePage from "./ProfilePage";
 import Nav from "./Nav"
 import Banner from "./Banner"
-import { StrictMode, useEffect } from "react";
-import {
+import { useState } from "react";
+import { TranContext} from "./TranContext";
+
+import{
   BrowserRouter,
   Routes,
   Route,
@@ -17,9 +19,11 @@ import {
 } from "react-router-dom";
 
 function App() {
+  const[locTranslation, setLocTranslation] = useState("")
 
   return (
-    //<StrictMode>
+ 
+    <TranContext.Provider value={{locTranslation, setLocTranslation}}>
       <BrowserRouter>
       <div className="App">
         <Nav />
@@ -33,7 +37,8 @@ function App() {
         </Routes>
       </div>
     </BrowserRouter>
-   // </StrictMode>
+    </TranContext.Provider>
+   
     
   );
 }

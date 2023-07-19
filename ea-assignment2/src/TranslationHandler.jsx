@@ -1,6 +1,7 @@
-import React, { useState, createElement, useEffect } from "react"
+import React, { useState, createElement, useEffect, useContext } from "react"
 import { API_URL } from "./utils";
 import PatchAPI from "./PatchAPI"
+import { TranContext } from "./TranContext";
 const images = require.context('./images', true, /\.(png)$/)
 const imageList = images.keys().map(image => images(image))
 let translations = []
@@ -36,6 +37,10 @@ function CreateImgElement(symbol, index){
 function TranslationHandler(){
     const [ text, setText ] = useState({value: ""})
     const [jsonData, setJsonData] = useState([])
+    const [locTranslation, setLocTranslation] = useContext(TranContext)
+
+    setLocTranslation("hello from context")
+    console.log(locTranslation)
     let textToTranslate = text.value
     let compareArray = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
     let symbolsToPrint = []
