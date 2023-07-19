@@ -1,6 +1,4 @@
-import { render } from "@testing-library/react"
 import React, { useState, createElement } from "react"
-import CompDiv from "./CompDiv"
 const images = require.context('./images', true, /\.(png)$/)
 const imageList = images.keys().map(image => images(image))
 let translations = []
@@ -30,13 +28,6 @@ function CreateImgElement(symbol, index){
     componentArray.push( component )
 }
 
-// Renders the div that holds the translated symbols (only for display on page change)
-// TODO: should move
-const RenderDiv = () => {
-    render(CompDiv(null))
-}
-
-
 function TranslationHandler(){
     const [ text, setText ] = useState({value: ""})
     let textToTranslate = text.value
@@ -57,6 +48,7 @@ function TranslationHandler(){
         translations.push(text.value)
 
         checkAndRenderSymbols()
+        setText({value: ""})
         //console.log(translations);
     } 
     
@@ -112,7 +104,6 @@ function TranslationHandler(){
     )
 }
 
-export { RenderDiv }
 export default TranslationHandler
 /**
  * <button onClick={ CleanUpComponents }>Clear</button>
