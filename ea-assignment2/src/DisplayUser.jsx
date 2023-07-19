@@ -40,7 +40,7 @@ function DisplayUser() {
             UserID: {sessionStorage.getItem("currID")}
             {listTrans}
           </ul>
-          <button onClick={DeleteTrans}>Clear Record</button>
+          <button className="orange-btn" onClick={DeleteTrans}>Clear Record</button>
         </>
       );
     }

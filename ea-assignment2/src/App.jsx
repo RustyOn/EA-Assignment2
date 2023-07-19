@@ -21,6 +21,9 @@ function App() {
     <BrowserRouter>
       <div className="App">
         <Nav />
+        <div id="login-banner">
+          <h2 id="banner-text">Lost in Translation</h2>
+        </div>
         <Routes>
           <Route path="/" element={<LoginPage />} />
           <Route path="/translation" element={<TranslationPage />} />
