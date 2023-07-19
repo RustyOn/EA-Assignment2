@@ -1,4 +1,4 @@
-# Experis Academcy Assignment 2 - Lost in Translation
+# Experis Academy Assignment 2 - Lost in Translation
 
 ## Description
 
