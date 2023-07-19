@@ -69,10 +69,10 @@ function InputDisplay() {
     <>
       <form onSubmit={handleSubmit}>
         <label>
-          Username: <input required type="text" ref={inputRef} />
+          Enter a username: <input required type="text" ref={inputRef} />
         </label>
 
-        <button type="submit">Login </button>
+        <button className="orange-btn" type="submit">Login </button>
       </form>
     </>
   );
