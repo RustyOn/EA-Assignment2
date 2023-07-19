@@ -21,9 +21,11 @@ You may also see any lint errors in the console.
 ## Prerequisites
 
 Visual Studio Code
+
 Node.js
 
 ## Authors
 Annika Zarske
+
 David Petersen 🙃
 
