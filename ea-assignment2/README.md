@@ -1,6 +1,10 @@
 # Experis Academcy Assignment 2 - Lost in Translation
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Description
+
+App description goes here
+
+
 
 ## How to use
 
