@@ -96,10 +96,22 @@ input{
   padding: 16px 20px;
   text-decoration: none;
   margin: 10px;
-  font-weight: bold;
   cursor: pointer;
+  font-size: large;
 }
 .orange-btn:hover{
   background-color: rgb(233, 180, 75);
 }
 
+.profile-list{
+  margin:0;
+  padding:0;
+  list-style: none;
+}
+
+.profile-list li{
+  padding:2px;
+  margin:2px 20rem;
+  background-color: #c4c4c4;
+  font-size: larger;
+}

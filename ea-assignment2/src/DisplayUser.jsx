@@ -43,7 +43,7 @@ function DisplayUser() {
         );
       return (
         <>
-          <ul>
+          <ul className="profile-list">
             {listTrans}
           </ul>
           <button className="orange-btn" onClick={DeleteTrans}>Clear Record</button>
