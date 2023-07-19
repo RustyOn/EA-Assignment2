@@ -5,7 +5,7 @@ This project was created as part of an Accelerated Learning course at Noroff. Th
 
 The app is a translation app that takes in user input and translates it to american sign language.
 
-The app is split into three main parts: The Login Page, Translation Page and the Profile Page
+The app is split into three main parts: The Login Page, the Translation Page and the Profile Page
 
 - The Login Page
   * Here the user can enter their desired username. The username is checked against the API that contains users and translation data.
