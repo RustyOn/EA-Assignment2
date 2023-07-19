@@ -1,8 +1,10 @@
-import React, { useState, createElement } from "react"
+import React, { useState, createElement, useEffect } from "react"
+import { API_URL } from "./utils";
 import PatchAPI from "./PatchAPI"
 const images = require.context('./images', true, /\.(png)$/)
 const imageList = images.keys().map(image => images(image))
 let translations = []
+let localTranslations = []
 let componentArray = []
 
 // TODO:
@@ -35,7 +37,28 @@ function TranslationHandler(){
     let compareArray = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
     let symbolsToPrint = []
     let textSymbolsArray = []
-    translations = []
+    const [jsonData, setJsonData] = useState([]);
+    let currID = sessionStorage.getItem("currID")
+
+    useEffect(() => {
+        fetch(API_URL)
+          .then((response) => response.json())
+          .then((json) => {
+            setJsonData(json);
+          })
+          .catch((error) => console.error(error.message));
+    }, []);
+
+    
+    function fetchJson(){
+        for (let i = 1; i < jsonData.length; i++) {
+            if(currID = jsonData[i].id){
+                return translations = jsonData[i].translations
+                //console.log(translations)
+            }
+        }
+    }
+    
     
     const handleTextChange = event =>{
         setText({ value: event.target.value })
@@ -44,20 +67,20 @@ function TranslationHandler(){
     const handleSubmit = event =>{
         event.preventDefault()
         if(text.value !== ""){
+            localTranslations = []
             textSymbolsArray = textToTranslate.split("")
             checkAndRenderSymbols()
-            translations.push(text.value)
-            console.log(translations);
-            PatchAPI(translations)
+            localTranslations.push(text.value)
+            fetchJson()
+
+            console.log(localTranslations);
+            console.log(translations)
+            let sendTranslations =[...localTranslations, ...translations]
+            console.log(sendTranslations);
+
+            PatchAPI(sendTranslations)
             setText({value: ""})
-
-            //TODO: patch api with translations
-            //check if number
         }
-
-
-        //console.log("this text was entered: " + text.value)
-        //console.log(textSymbolsArray)
     } 
     
     function checkAndRenderSymbols (){
