@@ -1,4 +1,5 @@
 import React, { useState, createElement } from "react"
+import PatchAPI from "./PatchAPI"
 const images = require.context('./images', true, /\.(png)$/)
 const imageList = images.keys().map(image => images(image))
 let translations = []
@@ -34,6 +35,7 @@ function TranslationHandler(){
     let compareArray = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
     let symbolsToPrint = []
     let textSymbolsArray = []
+    translations = []
     
     const handleTextChange = event =>{
         setText({ value: event.target.value })
@@ -41,15 +43,21 @@ function TranslationHandler(){
 
     const handleSubmit = event =>{
         event.preventDefault()
+        if(text.value !== ""){
+            textSymbolsArray = textToTranslate.split("")
+            checkAndRenderSymbols()
+            translations.push(text.value)
+            console.log(translations);
+            PatchAPI(translations)
+            setText({value: ""})
+
+            //TODO: patch api with translations
+            //check if number
+        }
+
+
         //console.log("this text was entered: " + text.value)
-        textSymbolsArray = textToTranslate.split("")
         //console.log(textSymbolsArray)
-
-        translations.push(text.value)
-
-        checkAndRenderSymbols()
-        setText({value: ""})
-        //console.log(translations);
     } 
     
     function checkAndRenderSymbols (){
