@@ -31,34 +31,36 @@ function CreateImgElement(symbol, index){
     componentArray.push( component )
 }
 
+
+
 function TranslationHandler(){
     const [ text, setText ] = useState({value: ""})
     let textToTranslate = text.value
     let compareArray = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
     let symbolsToPrint = []
     let textSymbolsArray = []
-    const [jsonData, setJsonData] = useState([]);
+    
+    const [jsonData, setJsonData] = useState([])
     let currID = sessionStorage.getItem("currID")
 
-    useEffect(() => {
+    function Fetch(){
         fetch(API_URL)
-          .then((response) => response.json())
-          .then((json) => {
-            setJsonData(json);
-          })
-          .catch((error) => console.error(error.message));
-    }, []);
-
+            .then((response) => response.json())
+            .then((json) => {
+                setJsonData(json)
+                console.log("json data: " + jsonData)
+            })
+        .catch((error) => console.error(error.message))
+    }
     
-    function fetchJson(){
+
+    function UpdateTranslations(){
         for (let i = 1; i < jsonData.length; i++) {
             if(currID = jsonData[i].id){
                 return translations = jsonData[i].translations
-                //console.log(translations)
             }
         }
     }
-    
     
     const handleTextChange = event =>{
         setText({ value: event.target.value })
@@ -71,7 +73,8 @@ function TranslationHandler(){
             textSymbolsArray = textToTranslate.split("")
             checkAndRenderSymbols()
             localTranslations.push(text.value)
-            fetchJson()
+            Fetch()
+            UpdateTranslations()
 
             console.log(localTranslations);
             console.log(translations)
