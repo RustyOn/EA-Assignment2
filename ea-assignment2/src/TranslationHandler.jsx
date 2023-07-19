@@ -1,7 +1,6 @@
 import React, { useState, createElement, useEffect } from "react"
 import { API_URL } from "./utils";
 import PatchAPI from "./PatchAPI"
-import { json } from "react-router-dom";
 const images = require.context('./images', true, /\.(png)$/)
 const imageList = images.keys().map(image => images(image))
 let translations = []
@@ -60,6 +59,7 @@ function TranslationHandler(){
     function UpdateTranslations(){
         for (let i = 1; i < jsonData.length; i++) {
             if(currID = jsonData[i].id){
+                console.log("json trans: " + jsonData[i].translations)
                 return translations = jsonData[i].translations
             }
         }
@@ -72,19 +72,22 @@ function TranslationHandler(){
     const handleSubmit = event =>{
         event.preventDefault()
         if(text.value !== ""){
-            localTranslations = []
-            textSymbolsArray = textToTranslate.split("")
+            //localTranslations = []
+            textSymbolsArray = textToTranslate.split("")        
             checkAndRenderSymbols()
+
             localTranslations.push(text.value)
-            Fetch()
-            UpdateTranslations()
+
+            //Fetch()
+            //UpdateTranslations()
 
             console.log(localTranslations);
-            console.log(translations)
-            let sendTranslations =[...localTranslations, ...translations]
-            console.log(sendTranslations);
+            //console.log(translations)
 
-            PatchAPI(sendTranslations)
+            //let sendTranslations =[...localTranslations, ...translations]
+            //console.log(sendTranslations);
+
+            //PatchAPI(sendTranslations)
             setText({value: ""})
         }
     } 
@@ -141,6 +144,7 @@ function TranslationHandler(){
     )
 }
 
+export { localTranslations }
 export default TranslationHandler
 /**
  * <button onClick={ CleanUpComponents }>Clear</button>
