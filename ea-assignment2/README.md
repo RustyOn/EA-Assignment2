@@ -5,6 +5,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## How to use
 
 Using Visual Studio Code open the folder the project files are located in
+
 Open the terminal by going to Terminal->New Terminal or by using the command "Ctrl+Shift+Ö" (This works with a swedish keyboard)
 
 In the project directory, you can run:
