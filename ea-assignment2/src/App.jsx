@@ -5,6 +5,7 @@ import TranslationPage from "./TranslationPage";
 import Page404 from "./Page404";
 import ProfilePage from "./ProfilePage";
 import Nav from "./Nav"
+import Banner from "./Banner"
 import { useEffect } from "react";
 import {
   BrowserRouter,
@@ -21,14 +22,13 @@ function App() {
     <BrowserRouter>
       <div className="App">
         <Nav />
-        <div id="login-banner">
-          <h2 id="banner-text">Lost in Translation</h2>
-        </div>
+        <Banner />
         <Routes>
           <Route path="/" element={<LoginPage />} />
           <Route path="/translation" element={<TranslationPage />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="*" element={<Page404 />} />
+          
         </Routes>
       </div>
     </BrowserRouter>

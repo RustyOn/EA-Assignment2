@@ -13,7 +13,7 @@ function checkUserExist(userName, jsonData) {
   if (jsonData !== []) {
     for (let i = 0; i < jsonData.length; i++) {
       if (jsonData[i].username === userName) {
-        sessionStorage.setItem("currID", i)
+        sessionStorage.setItem("currID", i + 1)
         return (userExists = true);
       } else {
         userExists = false;

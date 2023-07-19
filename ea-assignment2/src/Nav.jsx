@@ -6,6 +6,7 @@ import {
 function Nav() {
     const currPath = useLocation();
     if (currPath.pathname === "/") return
+
   
     function Logout(){
       if(sessionStorage.getItem("currUser") === null){
