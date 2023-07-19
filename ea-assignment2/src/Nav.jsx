@@ -27,6 +27,7 @@ function Nav() {
     return (
       <nav>
         <div className="nav-bar">
+          <ul className="nav-list">
           <li>
             <NavLink to="/translation">Translation</NavLink>
           </li>
@@ -36,6 +37,7 @@ function Nav() {
           <li onClick={ CleanUpCreatedElements }>
             <NavLink to="/" onClick={Logout}>Logout</NavLink>
           </li>
+          </ul>
         </div>
       </nav>
     )
