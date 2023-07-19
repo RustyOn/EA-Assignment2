@@ -7,6 +7,7 @@ import {
     useLocation,
     useNavigate,
   } from "react-router-dom";
+import { RenderDiv } from "./TranslationHandler";
 
 function Nav() {
     const currPath = useLocation();
@@ -28,7 +29,7 @@ function Nav() {
       <nav>
         <div className="nav-bar">
           <ul className="nav-list">
-          <li>
+          <li onClick={RenderDiv}>
             <NavLink to="/translation">Translation</NavLink>
           </li>
           <li onClick={ CleanUpCreatedElements }>

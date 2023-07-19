@@ -1,6 +1,7 @@
 import { cleanup, render } from "@testing-library/react"
 import React, { useState, createElement } from "react"
 import CompDiv from "./CompDiv"
+import { startDiv } from "./CompDiv"
 const images = require.context('./images', true, /\.(png)$/)
 const imageList = images.keys().map(image => images(image))
 let translations = []
@@ -13,9 +14,13 @@ function CreateImgElement(symbol, index){
         { src: symbol, alt: noPic, height: 50, width: 50, id: index },
         null
     )
-    //console.log(component);
     componentArray.push(component)
 }
+
+const RenderDiv = () => {
+    render(CompDiv(null))
+}
+RenderDiv()
 
 function TranslationHandler(){
     const [ text, setText ] = useState({value: ""})
@@ -47,7 +52,7 @@ function TranslationHandler(){
         Render()
     }
 
-     function Check(){
+    function Check(){
         componentArray = []
         symbolsToPrint = []
 
@@ -82,19 +87,17 @@ function TranslationHandler(){
 
     return(
         <>
-            <form onSubmit={ handleSubmit }>
-                <input type="text" value={ text.value } onChange = { handleTextChange }/>
-                <button type="submit" className="translate-button">Translate</button>
-            </form>
-                
-                <p></p>
             <div>
-                
+                <form onSubmit={ handleSubmit }>
+                    <input type="text" value={ text.value } onChange = { handleTextChange }/>
+                    <button type="submit" className="translate-button">Translate</button>
+                </form>    
             </div>
         </>
     )
 }
 
+export { RenderDiv }
 export default TranslationHandler
 /**
  * <button onClick={ CleanUpComponents }>Clear</button>
