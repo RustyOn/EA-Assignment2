@@ -6,7 +6,7 @@ import Page404 from "./Page404";
 import ProfilePage from "./ProfilePage";
 import Nav from "./Nav"
 import Banner from "./Banner"
-import { useEffect } from "react";
+import { StrictMode, useEffect } from "react";
 import {
   BrowserRouter,
   Routes,
@@ -19,7 +19,8 @@ import {
 function App() {
 
   return (
-    <BrowserRouter>
+    //<StrictMode>
+      <BrowserRouter>
       <div className="App">
         <Nav />
         <Banner />
@@ -32,6 +33,8 @@ function App() {
         </Routes>
       </div>
     </BrowserRouter>
+   // </StrictMode>
+    
   );
 }
 
