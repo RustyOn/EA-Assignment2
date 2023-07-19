@@ -65,14 +65,15 @@ input{
 
 .translation-box{
   background-color: #EEEEFF; 
-  width: 400;
-  height: 150;
-  border-radius: 15;
-  border: 'solid';
-  position: 'relative';
-  left: '50%';
-  margin-left: -200;
-  padding: 10;
+  width: 400px;
+  height: 150px;
+  border-radius: 15px;
+  border: none;
+  position: relative;
+  left: 50%;
+  margin-left: -200px;
+  padding: 10px;
+  box-shadow: 5px 5px #615055;
 }
 
 #login-banner{

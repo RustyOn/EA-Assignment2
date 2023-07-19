@@ -1,4 +1,4 @@
-import { cleanup, render } from "@testing-library/react"
+import { render } from "@testing-library/react"
 import React, { useState, createElement } from "react"
 import CompDiv from "./CompDiv"
 const images = require.context('./images', true, /\.(png)$/)
@@ -10,7 +10,7 @@ let componentArray = []
 // Limit characters
 // comment code
 // translation input to api
-// 
+// readme
 
 // Creates the image element for the translated symbols and adds it to an array for rendering
 function CreateImgElement(symbol, index){
@@ -22,7 +22,8 @@ function CreateImgElement(symbol, index){
             alt: noPic, 
             height: 50, 
             width: 50, 
-            id: index
+            id: index,
+            key: index
         },
         null
     )
@@ -60,7 +61,6 @@ function TranslationHandler(){
     } 
     
     function checkAndRenderSymbols (){
-        CleanUpComponents()
         Check()
         Render()
     }
@@ -95,12 +95,6 @@ function TranslationHandler(){
             const symbol = symbolsToPrint[index];
             CreateImgElement(symbol, index)
         }
-        render(CompDiv(componentArray))
-    }
-
-    // Cleans upp all rendered elements
-    function CleanUpComponents(){
-        cleanup()
     }
 
     return(
@@ -110,6 +104,9 @@ function TranslationHandler(){
                     <input type="text" value={ text.value } onChange = { handleTextChange }/>
                     <button type="submit" className="translate-button">Translate</button>
                 </form>    
+            </div>
+            <div className="translation-box">
+                { componentArray }
             </div>
         </>
     )
