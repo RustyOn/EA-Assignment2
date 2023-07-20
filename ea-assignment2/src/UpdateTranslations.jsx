@@ -5,7 +5,14 @@ import { localTranslations } from "./TranslationHandler"
 
 
 function UpdateTranslations(){
-    PatchAPI(localTranslations)
+    //console.log(localTranslations)
+    if(localTranslations === []) {
+        return
+    }else{
+        PatchAPI(localTranslations)
+    }
+   
+    
 
     return(
         <></>

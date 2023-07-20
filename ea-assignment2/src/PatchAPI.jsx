@@ -1,5 +1,6 @@
 import {API_URL, API_KEY} from "./utils.js"
 function PatchAPI(translationList){
+  
     let currID = sessionStorage.getItem("currID")
     fetch(`${API_URL}/${currID}`, {
         method: 'PATCH', 

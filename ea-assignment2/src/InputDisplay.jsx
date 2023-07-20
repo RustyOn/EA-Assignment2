@@ -19,10 +19,11 @@ function checkUserExist(userName, jsonData) {
         userExists = false;
       }
     }
+    sessionStorage.setItem("currID", jsonData.length+1)
     return userExists;
   }
 }
-//test
+
 function InputDisplay() {
   const [jsonData, setJsonData] = useState([]);
   const navigate = useNavigate();
@@ -62,7 +63,7 @@ function InputDisplay() {
       if (checkUserExist(userName, jsonData) === false) {
         //If user does not exist then a new user will be created
         console.log("Does not exist");
-        //PostAPI(userName) !!!!!!!!!!!
+        PostAPI(userName)
         console.log("Added new user");
        
       } else {

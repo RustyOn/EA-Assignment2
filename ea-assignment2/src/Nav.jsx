@@ -3,6 +3,7 @@ import {
     useLocation,
   } from "react-router-dom";
 
+
 function Nav() {
     const currPath = useLocation();
     if (currPath.pathname === "/") return
@@ -35,4 +36,5 @@ function Nav() {
     )
   }
 
+  
   export default Nav

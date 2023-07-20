@@ -1,7 +1,5 @@
 import React, { useState, createElement, useEffect, useContext } from "react"
 import { API_URL } from "./utils";
-import PatchAPI from "./PatchAPI"
-import { TranContext } from "./TranContext";
 const images = require.context('./images', true, /\.(png)$/)
 const imageList = images.keys().map(image => images(image))
 let translations = []
@@ -37,10 +35,7 @@ function CreateImgElement(symbol, index){
 function TranslationHandler(){
     const [ text, setText ] = useState({value: ""})
     const [jsonData, setJsonData] = useState([])
-    const [locTranslation, setLocTranslation] = useContext(TranContext)
 
-    setLocTranslation("hello from context")
-    console.log(locTranslation)
     let textToTranslate = text.value
     let compareArray = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
     let symbolsToPrint = []
@@ -64,7 +59,7 @@ function TranslationHandler(){
     function UpdateTranslations(){
         for (let i = 1; i < jsonData.length; i++) {
             if(currID = jsonData[i].id){
-                console.log("json trans: " + jsonData[i].translations)
+                //console.log("json trans: " + jsonData[i].translations)
                 return translations = jsonData[i].translations
             }
         }
@@ -114,12 +109,12 @@ function TranslationHandler(){
             for (let index = 0; index < compareArray.length; index++) {
                 const element = compareArray[index];
                 if(element === symbol){
-                    console.log("Match")
+                   // console.log("Match")
                     const img = imageList[index]
                     symbolsToPrint.push(img)
                     break
                 } else {
-                    console.log("No Match")
+                    //console.log("No Match")
                 }
             }
         }
