@@ -1,16 +1,8 @@
-import React, { useState, createElement, useEffect, useContext } from "react"
-import { API_URL } from "./utils";
+import React, { useState, createElement } from "react"
 const images = require.context('./images', true, /\.(png)$/)
 const imageList = images.keys().map(image => images(image))
-let translations = []
 let localTranslations = []
 let componentArray = []
-
-// TODO:
-// Limit characters
-// comment code
-// translation input to api
-// readme
 
 // Creates the image element for the translated symbols and adds it to an array for rendering
 function CreateImgElement(symbol, index){
@@ -30,64 +22,26 @@ function CreateImgElement(symbol, index){
     componentArray.push( component )
 }
 
-
-
 function TranslationHandler(){
     const [ text, setText ] = useState({value: ""})
-    const [jsonData, setJsonData] = useState([])
 
     let textToTranslate = text.value
     let compareArray = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
     let symbolsToPrint = []
     let textSymbolsArray = []
-    let currID = sessionStorage.getItem("currID")
-
-    useEffect(() =>{
-        Fetch()
-    }, [])
-
-    function Fetch(){
-        fetch(API_URL)
-            .then((response) => response.json())
-            .then((json) => {
-                setJsonData(json)
-            })
-        .catch((error) => console.error(error.message))
-    }
-    
-
-    function UpdateTranslations(){
-        for (let i = 1; i < jsonData.length; i++) {
-            if(currID = jsonData[i].id){
-                //console.log("json trans: " + jsonData[i].translations)
-                return translations = jsonData[i].translations
-            }
-        }
-    }
     
     const handleTextChange = event =>{
         setText({ value: event.target.value })
     }
 
+    // Handles submit, calling function that checks and renders the translated symbols
+    // Updates the list of translations that updates the API
     const handleSubmit = event =>{
         event.preventDefault()
         if(text.value !== ""){
-            //localTranslations = []
             textSymbolsArray = textToTranslate.split("")        
             checkAndRenderSymbols()
-
             localTranslations.push(text.value)
-
-            //Fetch()
-            //UpdateTranslations()
-
-            console.log(localTranslations);
-            //console.log(translations)
-
-            //let sendTranslations =[...localTranslations, ...translations]
-            //console.log(sendTranslations);
-
-            //PatchAPI(sendTranslations)
             setText({value: ""})
         }
     } 
@@ -146,6 +100,3 @@ function TranslationHandler(){
 
 export { localTranslations }
 export default TranslationHandler
-/**
- * <button onClick={ CleanUpComponents }>Clear</button>
- */
