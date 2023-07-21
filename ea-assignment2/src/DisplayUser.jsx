@@ -6,9 +6,6 @@ import DeleteAPI from "./DeleteAPI.jsx";
 function DisplayUser() {
   let currUser = sessionStorage.getItem("currUser");
   const [jsonData, setJsonData] = useState([]);
-  const[listData, setListData] = useState()
-  let runOnce = false;
-
   //Fetching the API and storing the data in a useState
   //We've had the useEffect trigger twice for some reason, possible re-render from further up?
   //Never found the actual cause
