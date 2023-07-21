@@ -1,9 +1,6 @@
 import PatchAPI from "./PatchAPI"
 import { localTranslations } from "./TranslationHandler"
 
-
-
-
 function UpdateTranslations(){
     //console.log(localTranslations)
     if(localTranslations.length === 0) {
@@ -11,8 +8,6 @@ function UpdateTranslations(){
     }else{
         PatchAPI(localTranslations)
     }
-   
-    
 
     return(
         <></>

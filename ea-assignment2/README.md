@@ -12,7 +12,7 @@ The app is split into three main parts: The Login Page, the Translation Page and
   * If the username is not found in the API a new user is created. Whichever the case the user gets redirected further to the Translation Page.
   * The username and ID is also stored in the browser session storage.
 - The Translation Page
-  * Translation description
+  * Here the user can translate words and sentences to sign language. The user inputs a word and then gets the corresponding letter signs in return.
 - The Profile Page
   * Here the user can see their latest ten translation inputs. Not the actual translation but the input that was used to create the translation.
   * The user can also clear out their translation data with a button click. This starts a PATCH request that empties out the translations array in the API.
