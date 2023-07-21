@@ -6,7 +6,7 @@ import { localTranslations } from "./TranslationHandler"
 
 function UpdateTranslations(){
     //console.log(localTranslations)
-    if(localTranslations === []) {
+    if(localTranslations.length === 0) {
         return
     }else{
         PatchAPI(localTranslations)
